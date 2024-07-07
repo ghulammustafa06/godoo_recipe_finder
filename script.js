@@ -58,3 +58,40 @@ function fetchRecipes(query) {
             displayError('Failed to retrieve recipes. Please try again later.');
         });
 }
+
+function displayError(message) {
+    const recipesDiv = document.getElementById('recipes');
+    recipesDiv.innerHTML = `<p class="error">${message}</p>`;
+}
+
+// Update script.js
+
+function fetchRecipes(query) {
+    const diet = document.getElementById('diet').value;
+    const health = document.getElementById('health').value;
+    const API_BASE_URL = "https://api.edamam.com/api/recipes/v2";
+    const API_ID = "your_api_id";
+    const API_KEY = "your_api_key";
+
+    let url = `${API_BASE_URL}?type=public&q=${query}&app_id=${API_ID}&app_key=${API_KEY}`;
+    if (diet) {
+        url += `&diet=${diet}`;
+    }
+    if (health) {
+        url += `&health=${health}`;
+    }
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.hits.length > 0) {
+                displayRecipes(data.hits);
+            } else {
+                displayError('No recipes found. Please try another search.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            displayError('Failed to retrieve recipes. Please try again later.');
+        });
+}
