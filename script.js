@@ -36,3 +36,25 @@ function displayRecipes(recipes) {
         recipesDiv.appendChild(recipeElement);
     });
 }
+
+// Add error message handling in script.js
+
+function fetchRecipes(query) {
+    const API_BASE_URL = "https://api.edamam.com/api/recipes/v2";
+    const API_ID = "607b1d41";
+    const API_KEY = "23e3fbad7cf81eeeee2cda398d2a0034";
+
+    fetch(`${API_BASE_URL}?type=public&q=${query}&app_id=${API_ID}&app_key=${API_KEY}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.hits.length > 0) {
+                displayRecipes(data.hits);
+            } else {
+                displayError('No recipes found. Please try another search.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            displayError('Failed to retrieve recipes. Please try again later.');
+        });
+}

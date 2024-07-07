@@ -36,3 +36,29 @@ button {
 button:hover {
     background-color: #4cae4c;
 }
+
+/* Add this to style.css */
+
+#recipes {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0;
+}
+
+.recipe {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.recipe h3 {
+    margin-top: 0;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+}
