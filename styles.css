@@ -322,3 +322,102 @@ button:hover {
     padding: 20px 0;
     font-size: 16px;
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+        margin-top: 120px;
+    }
+
+    .recipe,
+    .favorite {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    select,
+    button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    select,
+    button {
+        width: 100%;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    #recipes,
+    #favorites {
+        padding: 10px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+
+    .footer {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-top: 238px;
+    }
+
+    .recipe h3,
+    .favorite h3 {
+        font-size: 12px;
+    }
+
+    .recipe,
+    .favorite {
+        padding: 8px;
+    }
+
+    input[type="text"],
+    select,
+    button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    input[type="text"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    select,
+    button {
+        width: 100%;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    #recipes,
+    #favorites {
+        padding: 10px;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+
+    .footer {
+        font-size: 12px;
+    }
+}
