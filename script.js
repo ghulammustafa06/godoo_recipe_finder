@@ -194,3 +194,30 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+// A function to save a recipe to favorites
+function saveToFavorites(recipe) {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    favorites.push(recipe);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    alert('Recipe saved to favorites!');
+}
+
+// Modify displayRecipes function to include "Save to Favorites" button
+function displayRecipes(recipes) {
+    const recipesDiv = document.getElementById('recipes');
+    recipesDiv.innerHTML = '';
+    recipes.forEach(hit => {
+        const recipe = hit.recipe;
+        const recipeElement = document.createElement('div');
+        recipeElement.classList.add('recipe');
+        recipeElement.innerHTML = `
+            <h3>${recipe.label}</h3>
+            <p>${recipe.ingredientLines.join(', ')}</p>
+            <button onclick="showRecipeDetails('${encodeURIComponent(recipe.uri)}')">More Details</button>
+            <button onclick="saveToFavorites(${JSON.stringify(recipe)})">Save to Favorites</button>
+            <a href="${recipe.url}" target="_blank">View Recipe</a>
+        `;
+        recipesDiv.appendChild(recipeElement);
+    });
+}
