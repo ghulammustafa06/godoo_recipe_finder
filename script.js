@@ -327,3 +327,32 @@ function sortRecipesByCalories(order) {
     sortedRecipes.forEach(recipe => recipesDiv.appendChild(recipe));
 }
 
+// DisplayRecipes function to include data attributes for calories
+function displayRecipes(recipes) {
+    const recipesDiv = document.getElementById('recipes');
+    recipesDiv.innerHTML = '';
+    recipes.forEach(hit => {
+        const recipe = hit.recipe;
+        const recipeElement = document.createElement('div');
+        recipeElement.classList.add('recipe');
+        recipeElement.dataset.calories = recipe.calories.toFixed(2); // Data attribute for calories
+        recipeElement.innerHTML = `
+            <h3>${recipe.label}</h3>
+            <p>${recipe.ingredientLines.join(', ')}</p>
+            <button onclick="showRecipeDetails('${encodeURIComponent(recipe.uri)}')">More Details</button>
+            <button onclick="saveToFavorites(${JSON.stringify(recipe)})">Save to Favorites</button>
+            <a href="${recipe.url}" target="_blank">View Recipe</a>
+        `;
+        recipesDiv.appendChild(recipeElement);
+    });
+}
+
+// Modal close functionality to handle errors
+document.querySelector('.close').onclick = function () {
+    const modal = document.getElementById('recipeModal');
+    if (modal.style.display === "block") {
+        modal.style.display = "none";
+    } else {
+        console.error('Modal is not open.');
+    }
+};

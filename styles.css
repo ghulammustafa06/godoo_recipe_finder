@@ -1,43 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "PT Serif", serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
+    height: 100%;
+    margin: 0;
+    color: #333;
+}
+
+.bgimg {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; 
+    z-index: -1; 
 }
 
 h1 {
+    font-family: "Lobster", sans-serif;
     text-align: center;
-    margin-top: 20px;
+    font-size: 2.7rem;
+    margin-top: 240px;
+    color: #5cb85c;
 }
 
 form {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 50px;
+}
+
+input[type="text"], select, button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 input[type="text"] {
-    padding: 10px;
     width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
 }
 
 select {
-    padding: 10px;
     margin-left: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
 }
 
 button {
-    padding: 10px 20px;
-    border: none;
     background-color: #5cb85c;
     color: white;
-    border-radius: 4px;
+    border: none;
     cursor: pointer;
-    margin-left: 10px;
 }
 
 button:hover {
@@ -56,16 +71,45 @@ button:hover {
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 4px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.recipe:hover {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
 .recipe h3 {
     margin-top: 0;
+    color: #333;
 }
 
-.error {
-    color: red;
-    text-align: center;
-    margin-top: 20px;
+.recipe p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.recipe button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.recipe button:hover {
+    background-color: #555;
+}
+
+.recipe a {
+    color: #5cb85c;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.recipe a:hover {
+    text-decoration: underline;
 }
 
 #pagination {
@@ -77,22 +121,24 @@ button:hover {
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 100px;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: auto;
+    margin: 20px auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #ddd;
     width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
 
 .close {
@@ -100,11 +146,177 @@ button:hover {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
     color: black;
     text-decoration: none;
-    cursor: pointer;
+}
+
+/* New styles for the nutrition information */
+.modal-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.modal-content ul li {
+    margin-bottom: 5px;
+}
+
+/* Additional styling for buttons and form */
+#searchForm button,
+#prevPage,
+#nextPage {
+    margin-left: 10px;
+    padding: 9px 43px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#searchForm button:hover,
+#prevPage:hover,
+#nextPage:hover {
+    background-color: #4cae4c;
+}
+
+/* Styles for favorites */
+#favorites {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#favorites h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #5cb85c;
+}
+
+.favorite {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.favorite:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.favorite h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.favorite p {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.favorite a {
+    color: #5cb85c;
+    text-decoration: none;
+}
+
+.favorite a:hover {
+    text-decoration: underline;
+}
+
+/* New styles for the nutrition information */
+.modal-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.modal-content ul li {
+    margin-bottom: 5px;
+}
+
+/* Additional styling for buttons and form */
+#searchForm button,
+#prevPage,
+#nextPage {
+    margin-left: 10px;
+    padding: 10px 43px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#searchForm button:hover,
+#prevPage:hover,
+#nextPage:hover {
+    background-color: #4cae4c;
+}
+
+/* Styles for favorites */
+#favorites {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#favorites h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #5cb85c;
+}
+
+.favorite {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.favorite:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.favorite h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.favorite p {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.favorite a {
+    color: #5cb85c;
+    text-decoration: none;
+}
+
+.favorite a:hover {
+    text-decoration: underline;
+}
+
+.body-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+}
+
+.footer {
+    background-color: #ffffff0c; 
+    color: #fff; 
+    text-align: center; 
+    padding: 20px 0;
+    font-size: 16px; 
 }
