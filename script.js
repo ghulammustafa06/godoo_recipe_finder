@@ -70,8 +70,8 @@ function fetchRecipes(query) {
     const diet = document.getElementById('diet').value;
     const health = document.getElementById('health').value;
     const API_BASE_URL = "https://api.edamam.com/api/recipes/v2";
-    const API_ID = "your_api_id";
-    const API_KEY = "your_api_key";
+    const API_ID = "607b1d41";
+    const API_KEY = "23e3fbad7cf81eeeee2cda398d2a0034";
 
     let url = `${API_BASE_URL}?type=public&q=${query}&app_id=${API_ID}&app_key=${API_KEY}`;
     if (diet) {
@@ -116,8 +116,8 @@ function fetchRecipes(query) {
     const diet = document.getElementById('diet').value;
     const health = document.getElementById('health').value;
     const API_BASE_URL = "https://api.edamam.com/api/recipes/v2";
-    const API_ID = "your_api_id";
-    const API_KEY = "your_api_key";
+    const API_ID = "607b1d41";
+    const API_KEY = "23e3fbad7cf81eeeee2cda398d2a0034";
 
     let url = `${API_BASE_URL}?type=public&q=${query}&app_id=${API_ID}&app_key=${API_KEY}&from=${currentPage * 10}&to=${(currentPage + 1) * 10}`;
     if (diet) {
@@ -142,4 +142,21 @@ function fetchRecipes(query) {
             console.error('Error fetching data:', error);
             displayError('Failed to retrieve recipes. Please try again later.');
         });
+}
+
+function displayRecipes(recipes) {
+    const recipesDiv = document.getElementById('recipes');
+    recipesDiv.innerHTML = '';
+    recipes.forEach(hit => {
+        const recipe = hit.recipe;
+        const recipeElement = document.createElement('div');
+        recipeElement.classList.add('recipe');
+        recipeElement.innerHTML = `
+            <h3>${recipe.label}</h3>
+            <p>${recipe.ingredientLines.join(', ')}</p>
+            <button onclick="showRecipeDetails('${recipe.uri}')">More Details</button>
+            <a href="${recipe.url}" target="_blank">View Recipe</a>
+        `;
+        recipesDiv.appendChild(recipeElement);
+    });
 }
