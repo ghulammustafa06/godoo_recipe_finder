@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Recipe Finder</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="body-container">
-    <div class="main-content">  
-      <img class="bgimg" src="bg_img.jpg" alt="Background Image"> 
-    <h1>Welcome to Godoo Recipe Finder</h1>
-    <form id="searchForm">
-        <input type="text" id="query" placeholder="Enter ingredient or dish">
-        <select id="diet">
-            <option value="">Select Diet</option>
-            <option value="balanced">Balanced</option>
-            <option value="high-protein">High-Protein</option>
-            <option value="low-fat">Low-Fat</option>
-            <option value="low-carb">Low-Carb</option>
-        </select>
-        <select id="health">
-            <option value="">Select Health Label</option>
-            <option value="vegan">Vegan</option>
-            <option value="vegetarian">Vegetarian</option>
-            <option value="sugar-conscious">Sugar-Conscious</option>
-            <option value="peanut-free">Peanut-Free</option>
-        </select>
-        <button type="submit">Search</button>
-    </form>
-    <div id="recipes"></div>
-    <div id="pagination">
-        <button id="prevPage" disabled>Previous</button>
-        <button id="nextPage" disabled>Next</button>
-    </div>
-    <div id="recipeModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="recipeDetails"></div>
-        </div>
-    </div>
-  </div>
-    <footer class="footer">
-      <p>Made by GM. With ❤</p>
-  </footer>
 
-    <script src="script.js"></script>
+<body>
+    <div class="body-container">
+        <div class="main-content">
+            <img class="bgimg" src="bg_img.jpg" alt="Background Image">
+            <h1>Welcome to Godoo Recipe Finder</h1>
+            <form id="searchForm">
+                <input type="text" id="query" placeholder="Enter ingredient or dish">
+                <select id="diet">
+                    <option value="">Select Diet</option>
+                    <option value="balanced">Balanced</option>
+                    <option value="high-protein">High-Protein</option>
+                    <option value="low-fat">Low-Fat</option>
+                    <option value="low-carb">Low-Carb</option>
+                </select>
+                <select id="health">
+                    <option value="">Select Health Label</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="sugar-conscious">Sugar-Conscious</option>
+                    <option value="peanut-free">Peanut-Free</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+            <div id="recipes"></div>
+            <div id="pagination">
+                <button id="prevPage" disabled>Previous</button>
+                <button id="nextPage" disabled>Next</button>
+            </div>
+            <div id="recipeModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div id="recipeDetails"></div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <p>Made by GM. With ❤</p>
+        </footer>
+
+        <script src="script.js"></script>
 </body>
+
 </html>
