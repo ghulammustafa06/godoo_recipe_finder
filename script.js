@@ -294,4 +294,36 @@ function fetchRecipes(query) {
         url += `&health=${health}`;
     }
 
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.hits.length > 0) {
+                displayRecipes(data.hits);
+                updatePaginationControls(data);
+            } else {
+                displayError('No recipes found. Please try another search.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            displayError('Failed to retrieve recipes. Please try again later.');
+        });
+}
+
+// Add this function to sort recipes by calories
+function sortRecipesByCalories(order) {
+    const recipes = document.querySelectorAll('.recipe');
+    const sortedRecipes = Array.from(recipes).sort((a, b) => {
+        const caloriesA = parseFloat(a.dataset.calories);
+        const caloriesB = parseFloat(b.dataset.calories);
+        if (order === 'asc') {
+            return caloriesA - caloriesB;
+        } else {
+            return caloriesB - caloriesA;
+        }
+    });
+    const recipesDiv = document.getElementById('recipes');
+    recipesDiv.innerHTML = '';
+    sortedRecipes.forEach(recipe => recipesDiv.appendChild(recipe));
+}
 
