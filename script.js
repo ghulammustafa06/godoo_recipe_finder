@@ -254,3 +254,44 @@ function showRecipeDetails(uri) {
             recipeDetailsDiv.innerHTML = '<p>Failed to retrieve recipe details. Please try again later.</p>';
         });
 }
+
+// Add this function to control pagination
+function updatePaginationControls(data) {
+    const prevButton = document.getElementById('prevPage');
+    const nextButton = document.getElementById('nextPage');
+
+    prevButton.disabled = currentPage === 0;
+    nextButton.disabled = !data.more;
+
+    prevButton.onclick = () => {
+        if (currentPage > 0) {
+            currentPage--;
+            fetchRecipes(document.getElementById('query').value);
+        }
+    };
+
+    nextButton.onclick = () => {
+        if (data.more) {
+            currentPage++;
+            fetchRecipes(document.getElementById('query').value);
+        }
+    };
+}
+
+// Modify fetchRecipes function to call updatePaginationControls
+function fetchRecipes(query) {
+    const diet = document.getElementById('diet').value;
+    const health = document.getElementById('health').value;
+    const API_BASE_URL = "https://api.edamam.com/api/recipes/v2";
+    const API_ID = "your_actual_api_id"; // Replace with your actual Application ID
+    const API_KEY = "your_actual_api_key"; // Replace with your actual Application Key
+
+    let url = `${API_BASE_URL}?type=public&q=${query}&app_id=${API_ID}&app_key=${API_KEY}&from=${currentPage * 10}&to=${(currentPage + 1) * 10}`;
+    if (diet) {
+        url += `&diet=${diet}`;
+    }
+    if (health) {
+        url += `&health=${health}`;
+    }
+
+
