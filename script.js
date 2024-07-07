@@ -95,3 +95,51 @@ function fetchRecipes(query) {
             displayError('Failed to retrieve recipes. Please try again later.');
         });
 }
+
+// Update script.js
+
+let currentPage = 0;
+
+document.getElementById('prevPage').addEventListener('click', function() {
+    if (currentPage > 0) {
+        currentPage--;
+        fetchRecipes(document.getElementById('query').value);
+    }
+});
+
+document.getElementById('nextPage').addEventListener('click', function() {
+    currentPage++;
+    fetchRecipes(document.getElementById('query').value);
+});
+
+function fetchRecipes(query) {
+    const diet = document.getElementById('diet').value;
+    const health = document.getElementById('health').value;
+    const API_BASE_URL = "https://api.edamam.com/api/recipes/v2";
+    const API_ID = "your_api_id";
+    const API_KEY = "your_api_key";
+
+    let url = `${API_BASE_URL}?type=public&q=${query}&app_id=${API_ID}&app_key=${API_KEY}&from=${currentPage * 10}&to=${(currentPage + 1) * 10}`;
+    if (diet) {
+        url += `&diet=${diet}`;
+    }
+    if (health) {
+        url += `&health=${health}`;
+    }
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.hits.length > 0) {
+                displayRecipes(data.hits);
+                document.getElementById('prevPage').disabled = currentPage === 0;
+                document.getElementById('nextPage').disabled = data.more === false;
+            } else {
+                displayError('No recipes found. Please try another search.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            displayError('Failed to retrieve recipes. Please try again later.');
+        });
+}
