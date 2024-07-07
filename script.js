@@ -1,6 +1,6 @@
 // script.js
 
-document.getElementById('searchForm').addEventListener('submit', function(event) {
+document.getElementById('searchForm').addEventListener('submit', function (event) {
     event.preventDefault();
     const query = document.getElementById('query').value;
     fetchRecipes(query);
@@ -64,7 +64,6 @@ function displayError(message) {
     recipesDiv.innerHTML = `<p class="error">${message}</p>`;
 }
 
-// Update script.js
 
 function fetchRecipes(query) {
     const diet = document.getElementById('diet').value;
@@ -100,14 +99,14 @@ function fetchRecipes(query) {
 
 let currentPage = 0;
 
-document.getElementById('prevPage').addEventListener('click', function() {
+document.getElementById('prevPage').addEventListener('click', function () {
     if (currentPage > 0) {
         currentPage--;
         fetchRecipes(document.getElementById('query').value);
     }
 });
 
-document.getElementById('nextPage').addEventListener('click', function() {
+document.getElementById('nextPage').addEventListener('click', function () {
     currentPage++;
     fetchRecipes(document.getElementById('query').value);
 });
@@ -159,4 +158,39 @@ function displayRecipes(recipes) {
         `;
         recipesDiv.appendChild(recipeElement);
     });
+}
+
+function showRecipeDetails(uri) {
+    const recipeDetailsDiv = document.getElementById('recipeDetails');
+    const modal = document.getElementById('recipeModal');
+    modal.style.display = "block";
+
+    fetch(`https://api.edamam.com/api/recipes/v2/${encodeURIComponent(uri)}?type=public&app_id=your_api_id&app_key=your_api_key`)
+        .then(response => response.json())
+        .then(data => {
+            const recipe = data.recipe;
+            recipeDetailsDiv.innerHTML = `
+                <h2>${recipe.label}</h2>
+                <img src="${recipe.image}" alt="${recipe.label}">
+                <p><strong>Ingredients:</strong> ${recipe.ingredientLines.join(', ')}</p>
+                <p><strong>Calories:</strong> ${recipe.calories.toFixed(2)}</p>
+                <p><strong>Diet Labels:</strong> ${recipe.dietLabels.join(', ')}</p>
+                <p><strong>Health Labels:</strong> ${recipe.healthLabels.join(', ')}</p>
+            `;
+        })
+        .catch(error => {
+            console.error('Error fetching recipe details:', error);
+            recipeDetailsDiv.innerHTML = '<p>Failed to retrieve recipe details. Please try again later.</p>';
+        });
+}
+
+document.querySelector('.close').onclick = function () {
+    document.getElementById('recipeModal').style.display = "none";
+}
+
+window.onclick = function (event) {
+    const modal = document.getElementById('recipeModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
