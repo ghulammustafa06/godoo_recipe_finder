@@ -221,3 +221,36 @@ function displayRecipes(recipes) {
         recipesDiv.appendChild(recipeElement);
     });
 }
+
+//showRecipeDetails function to include nutrition information
+function showRecipeDetails(uri) {
+    const recipeDetailsDiv = document.getElementById('recipeDetails');
+    const modal = document.getElementById('recipeModal');
+    modal.style.display = "block";
+
+    const API_BASE_URL = "https://api.edamam.com/api/recipes/v2";
+    const API_ID = "607b1d41";
+    const API_KEY = "23e3fbad7cf81eeeee2cda398d2a0034";
+
+    fetch(`${API_BASE_URL}/${uri}?type=public&app_id=${API_ID}&app_key=${API_KEY}`)
+        .then(response => response.json())
+        .then(data => {
+            const recipe = data.recipe;
+            recipeDetailsDiv.innerHTML = `
+                <h2>${recipe.label}</h2>
+                <img src="${recipe.image}" alt="${recipe.label}">
+                <p><strong>Ingredients:</strong> ${recipe.ingredientLines.join(', ')}</p>
+                <p><strong>Calories:</strong> ${recipe.calories.toFixed(2)}</p>
+                <p><strong>Diet Labels:</strong> ${recipe.dietLabels.join(', ')}</p>
+                <p><strong>Health Labels:</strong> ${recipe.healthLabels.join(', ')}</p>
+                <p><strong>Nutrients:</strong></p>
+                <ul>
+                    ${Object.entries(recipe.totalNutrients).map(([key, value]) => `<li>${value.label}: ${value.quantity.toFixed(2)} ${value.unit}</li>`).join('')}
+                </ul>
+            `;
+        })
+        .catch(error => {
+            console.error('Error fetching recipe details:', error);
+            recipeDetailsDiv.innerHTML = '<p>Failed to retrieve recipe details. Please try again later.</p>';
+        });
+}
